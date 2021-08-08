@@ -47,13 +47,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     win: boolean;
 
     static associate(models: any) { 
-
-      // Bet.belongsTo(models.User, {as: 'userId'}); // Adds roleId to user rather than userRoleId
-
-      // Bet.belongsTo(models.User, {
-      //   foreignKey: 'userId',
-      //   // as: 'userId'
-      // });
     }
   };
   Bet.init({

@@ -1,13 +1,10 @@
 import { Arg, Ctx, FieldResolver, Int, Mutation, Query, Resolver, Root } from "type-graphql"
 import { IGraphqlContext } from ".."
-// import Bet, { BetUpsertParams } from "../../models/Bet"
-// import User from "../../models/User"
 import {Model, Sequelize} from 'sequelize-typescript';
 import db from "../../database/models";
 import { BetUpsertParams } from "../../database/models/Bet";
-import { calculateOdd, generateResult, getBet } from "../../utils/common";
-// import { getBet } from "../../utils/common";
-
+import { calculateOdd, generateResult } from "../../utils/common";
+ 
 
 @Resolver(() => db.Bet)
 export class BetResolver {
@@ -46,7 +43,7 @@ export class BetResolver {
   @Mutation((returns) => db.Bet)
   async createBet(
    @Arg('userId' ,type => Int, {nullable: false}) userId: number,
-   @Arg('chance', {nullable: false}) chance: number, 
+   @Arg('chance', type => Int, {nullable: false}) chance: number, 
    @Arg('betAmount', {nullable: false}) betAmount: number, 
    @Ctx() ctx: IGraphqlContext)  {
     const {dsFactory} = ctx

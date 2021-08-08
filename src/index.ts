@@ -2,28 +2,13 @@ import http from 'http'
 import express from 'express'
 import db from './database/models';
 import graphqlApp from './graphql';
-import cookieParser from 'cookie-parser';
-import compression from 'compression'
-import bodyParser from 'body-parser'
-import cors from 'cors';
 import { useTransaction } from './server/transaction';
 import appConfig from './config'
  
 
 let _server: http.Server
 const app = express()
-app.use(compression())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
 
-app.use(cookieParser())
-
-app.use(
-  cors({
-    origin: '*',
-    credentials: true,
-  })
-)
 app.use('*', useTransaction)
 app.use(graphqlApp)
 

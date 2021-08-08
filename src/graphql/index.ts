@@ -1,25 +1,15 @@
 import {ContextFunction} from 'apollo-server-core'
 import {ApolloServer} from 'apollo-server-express'
- import express from 'express'
- import {ExpressContext} from 'apollo-server-express/dist/ApolloServer'
-
-// import {EntityManager, getConnection} from 'typeorm'
+import express from 'express'
+import {ExpressContext} from 'apollo-server-express/dist/ApolloServer'
 import {buildSchemaSync} from 'type-graphql'
 import {DataServiceFactory} from '../database/services/Factory'
-import config from '../config/config'
-// import {User} from '../database/entities'
-// import {ServiceFactory} from '../services'
 import {resolvers} from './resolvers'
-import { Sequelize } from 'sequelize-typescript'
-// import errorTrackingPlugin from './extensions/errorTracker.plugin'
-
+  
 export interface IGraphqlContext {
-//   user?: User
-  req: Express.Request
-  entityManager?: Sequelize
-  dsFactory?: DataServiceFactory
-//   externalFactory?: ServiceFactory
-}
+    req: Express.Request
+   dsFactory?: DataServiceFactory
+ }
 
  
 
@@ -34,11 +24,9 @@ export const getGraphqlServer = (context: ContextFunction<ExpressContext, IGraph
 }
 
 const graphqlContext: ContextFunction<ExpressContext, IGraphqlContext> = ({req, connection}): IGraphqlContext => {
-   if (connection) return connection.context
-
-  const {user, trxContext: trx, dsFactory} = req
- 
-  return {req, entityManager: trx?.manager, dsFactory}
+  if (connection) return connection.context
+  const {dsFactory} = req
+  return {req,  dsFactory}
 }
 
 export const graphqlServer = getGraphqlServer(graphqlContext)

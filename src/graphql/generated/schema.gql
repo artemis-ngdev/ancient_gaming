@@ -14,7 +14,7 @@ type Bet {
 }
 
 type Mutation {
-  createBet(betAmount: Float!, chance: Float!, userId: Int!): Bet!
+  createBet(betAmount: Float!, chance: Int!, userId: Int!): Bet!
 }
 
 type Query {

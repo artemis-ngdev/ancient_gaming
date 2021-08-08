@@ -23,13 +23,9 @@ export class UserResolver {
 
   @FieldResolver(() => [db.Bet])
   async bets(@Root() user: typeof db.User, @Ctx() ctx: IGraphqlContext): Promise<Model<typeof db.Bet, typeof db.Bet>[]>  {
-    const {dsFactory} = ctx
-    console.log('comess  here??')
-
+     const {dsFactory} = ctx
      const bets = await dsFactory.getBetDS().repository.findAll({where: {userId: user.id}})
-     console.log('fuckign bets', bets)
-
-    return bets
+     return bets
   }
 
 }
