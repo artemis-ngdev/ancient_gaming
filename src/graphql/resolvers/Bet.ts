@@ -25,16 +25,16 @@ export class BetResolver {
     const {dsFactory } = ctx
     const clause =  {  
           attributes: [
-            "userId", "win","payout", "id",
+            "userId", "win" ,
             [Sequelize.fn('MAX', Sequelize.col('betAmount')), 'betAmount'],
-            // [Sequelize.fn('MAX', Sequelize.col('payout')), 'payout'],
+            [Sequelize.fn('MAX', Sequelize.col('payout')), 'payout'],
             [Sequelize.fn('MAX', Sequelize.col('chance')), 'chance'],
             ],
            where: {
             win: true,
             },
            limit,
-           group: ["userId", "win", "payout", "id"],
+           group: ["userId", "win" ]           
       }       
     const result = await dsFactory.getBetDS().getMany(clause) 
     return  result

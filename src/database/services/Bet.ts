@@ -12,8 +12,8 @@ export class BetDataService extends ADataService<typeof db.Bet> {
 		const betObject = await this.repository.create({
 		  ...params
 		})
-		return betObject.save().then(async (savedBed) => {
-			return savedBed
+		return betObject.save().then(async (savedBet) => {
+			return savedBet
 		}) 
 	}
  	 
